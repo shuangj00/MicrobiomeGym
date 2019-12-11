@@ -1,7 +1,7 @@
 # Microbiom Gym
 
 A Short Introduction to the Microbiom Gym
-<img src="https://github.com/shuangj00/MicrobiomeGym/raw/master/Readme_files/figure-gfm/title_image.png" title=" " alt=" " width="70%" style="display: block; margin: auto;" />
+<img src="https://github.com/shuangj00/MicrobiomeGym/raw/master/Readme_files/figure-gfm/title_image.png" title=" " alt=" " width="90%" style="display: block; margin: auto;" />
 
 <div style="margin-bottom:50px;">
 
