@@ -1,8 +1,3 @@
-
-
-
-
-
 # Microbiom Gym
 
 A Short Introduction to the Microbiom Gym
@@ -12,15 +7,16 @@ A Short Introduction to the Microbiom Gym
 
 </div>
 
+
 ## Introduction
 
 The Microbiome Gym contains tools for analyzing the microbiome count
 data:
 
-  - Providing simulated and sythetic data with documented assumptions
+  - Providing simulated and synthetic data with documented assumptions
   - Implementing a wide range of statistical models for the differential
     abundance analysis
-  - Visuliazing the model performance of selecting the discriminating
+  - Visualizing the model performance of selecting the discriminating
     features
 
 <div style="margin-bottom:50px;">
@@ -30,16 +26,17 @@ data:
 ## Contents
 
   - [Dependency](#dependency)
-  - [Statistical tests](#tests)
-  - [Main functions](#functions)
-      - [Model input](#inputs)
-      - [Model output](#outputs)
-  - [Data for model evaluation](#datasets)
-  - [An example of Microbiome Gym](#examples)
-      - [Load data](#loaddata)
-      - [Apply statistical tests](#fit-model)
-      - [Vizualize model performance](#vizualize-model-performance)
+  - [Statistical tests](#statistical-tests)
+  - [Main functions](#main-functions)
+      - [Model input](#model-input)
+      - [Model output](#model-output)
+  - [Data for model evaluation](#data-for-model-evaluation)
+  - [Tutorial](#tutorial)
+      - [Load data](#load-data)
+      - [Apply statistical tests](#apply-statistical-tests)
+      - [Visualize model performance](#visualize-model-performance)
   - [Contact](#contact)
+  - [Reference](#reference)
 
 ## Dependency
 
@@ -70,31 +67,14 @@ R (version 3.6.0 or later)
 ## Statistical tests
 
 Microbiome Gym provides the following statistical tests for the
-differential abundance analysis of microbiome count data.
+differential abundance analysis of microbiome count data. See a brief
+introduction of each method by clicking the name.
 
-  - [t-test and ANOVA](#anova)
-  - [Wilcoxon rank-sum test and Kruskal-Wallis test](#kruskal)
-  - [DESeq2](#deseq2)
-  - [edgeR](#edger)
-  - [WaVE-DESeq2 and WaVE-edgeR](#wave)
-  - [metagenomeSeq](#metagenomeseq)
-  - [DA test](#DAtest)
-  - [corncob](#corncob)
-  - [LDM](#ldm)
-  - [ZINB-DPP](#zinbdpp)
-    <div style="margin-bottom:50px;">
-    </div>
+<details>
 
-Below, we give a brief introduction of all the statistical testings
-provided by Microbiome Gym.
+<summary>t-test and ANOVA</summary>
 
-<div style="margin-bottom:25px;">
-
-</div>
-
-#### t-test and ANOVA
-
-###### – named as `tTest`, `ANOVA` in Microbiome Gym
+###### named as `tTest`, `ANOVA` in Microbiome Gym
 
 Many classic statistical tests are available to analyze gut microbiome.
 We can use the t-test to compare the mean of each individual taxon’s
@@ -105,9 +85,13 @@ analysis of variance (ANOVA) when having more than two groups.
 
 </div>
 
-#### Wilcoxon rank-sum test and Kruskal-Wallis test
+</details>
 
-###### – named as `WilcoxonRankSum`, `KruskalWallis` in Microbiome Gym
+<details>
+
+<summary>Wilcoxon rank-sum test and Kruskal-Wallis test</summary>
+
+###### named as `WilcoxonRankSum`, `KruskalWallis` in Microbiome Gym
 
 Wilcoxon rank-sum test and Kruskal-Wallis test are the non-parametric
 analogous of the t-test and ANOVA, respectively.These two non-parametric
@@ -118,12 +102,16 @@ taxon’s relative abundance across phenotype groups.
 
 </div>
 
-#### DESeq2
+</details>
 
-###### – named as `DESeq2` in Microbiome Gym
+<details>
+
+<summary>DESeq2</summary>
+
+###### named as `DESeq2` in Microbiome Gym
 
 DESeq2 is a method for differential analysis of count data using
-shrinkage estimation for dispersions and fold changes to improve
+shrinkage estimation for dispersion and fold changes to improve
 stability and interpretability of estimates (Love, Huber, and Anders
 2014). DESeq2 is widely used for analyzing the RNA-Seq data, and is
 further adopted for studying microbiome data.
@@ -135,9 +123,13 @@ More details can be found
 
 </div>
 
-#### edgeR
+</details>
 
-###### – named as `edgeR` in Microbiome Gym
+<details>
+
+<summary>edgeR</summary>
+
+###### named as `edgeR` in Microbiome Gym
 
 edgeR is designed for gene expression studies to determine whether there
 is evidence that counts for a transcript or exon are significantly
@@ -154,9 +146,13 @@ More details can be found
 
 </div>
 
-#### WaVE-DESeq2 and WaVE-edgeR
+</details>
 
-###### – named as `WaVEDESeq2`, `WaVEedgeR` in Microbiome Gym
+<details>
+
+<summary>WaVE-DESeq2 and WaVE-edgeR</summary>
+
+###### named as `WaVEDESeq2`, `WaVEedgeR` in Microbiome Gym
 
 Unlike the RNA-Seq data, the microbiome sequencing and single-cell
 sequencing data usually contain a large amount of zeros. To further
@@ -177,9 +173,13 @@ More details can be found
 
 </div>
 
-#### metagenomeSeq
+</details>
 
-###### – named as `metagenomeSeq` in Microbiome Gym
+<details>
+
+<summary>metagenomeSeq</summary>
+
+###### named as `metagenomeSeq` in Microbiome Gym
 
 metagenomeSeq is designed to determine taxonomic features
 (e.g. Operational Taxanomic Unit (OTU), species, etc.) that are
@@ -195,9 +195,13 @@ More details can be found
 
 </div>
 
-#### DA test
+</details>
 
-###### – named as `DATest` in Microbiome Gym
+<details>
+
+<summary>DA test</summary>
+
+###### named as `DATest` in Microbiome Gym
 
 DA test compares different statistical methods for differential
 abundance and expression analysis on datasets such as RNA-Seq,
@@ -223,9 +227,13 @@ More details can be found
 
 </div>
 
-#### corncob
+</details>
 
-###### – named as `corncob` in Microbiome Gym
+<details>
+
+<summary>corncob</summary>
+
+###### named as `corncob` in Microbiome Gym
 
 corncob is short for <u>c</u>ount <u>r</u>egressio<u>n</u> for
 <u>c</u>orrelated <u>o</u>bservations with the <u>b</u>eta-binomial
@@ -242,9 +250,13 @@ More details can be found [here](https://arxiv.org/abs/1902.02776).
 
 </div>
 
-#### LDM
+</details>
 
-###### – named as `LDMtest` in Microbiome Gym
+<details>
+
+<summary>LDM</summary>
+
+###### named as `LDMtest` in Microbiome Gym
 
 LDM stands for the <u>l</u>inear <u>d</u>ecomposition <u>m</u>odel
 proposed by Hu and Satten (2017). LDM is designed for analyzing
@@ -262,9 +274,13 @@ More details can be found
 
 </div>
 
-#### ZINB-DPP
+</details>
 
-###### – named as `ZINBDPP` in Microbiome Gym
+<details>
+
+<summary>ZINB-DPP</summary>
+
+###### named as `ZINBDPP` in Microbiome Gym
 
 The ZINB-DPP model is a special case of the bi-level Bayesian framework
 for microbiome data differential abundance analysis proposed by Li et
@@ -276,6 +292,12 @@ taxonomic levels while offering well-controlled Bayesian false discovery
 rates.
 
 More details can be found [here](https://arxiv.org/abs/1902.08741).
+
+<div style="margin-bottom:50px;">
+
+</div>
+
+</details>
 
 <div style="margin-bottom:50px;">
 
@@ -297,18 +319,23 @@ the model performance.
     for differential abundance analysis
   - `gymControl`: Control the computational auances of the
     `MicrobiomeGym` function
-  - `plot.ROC`: Vizualize the model performance with respect to
+  - `plot.ROC`: Visualize the model performance with respect to
     selecting the truly discriminating features
 
 ### Model input
 
 `MicrobiomeGym` is the main function, which takes three input:
 
-  - `count.matrix`: The \(n\)-by-\(p\) microbiome count matrix obtained
-    in a 16S rRNA study or a metagenomics sequencing study, where \(n\)
-    is the sample size and \(p\) is the number of taxonomic features
-  - `phenotype`: A vector of length \(n\) with distinct levels
-    representing multiple phenotypes
+  - `count.matrix`: The ![n](https://latex.codecogs.com/png.latex?n
+    "n")-by-![p](https://latex.codecogs.com/png.latex?p "p") microbiome
+    count matrix obtained in a 16S rRNA study or a metagenomics
+    sequencing study, where ![n](https://latex.codecogs.com/png.latex?n
+    "n") is the sample size and
+    ![p](https://latex.codecogs.com/png.latex?p "p") is the number of
+    taxonomic features
+  - `phenotype`: A vector of length
+    ![n](https://latex.codecogs.com/png.latex?n "n") with distinct
+    levels representing multiple phenotypes
   - `gymControl`: A function that passes additional information of the
     statistical model to be implemented, and the corresponding
     model-specific parameters. For example, we can specify to use ANOVA
@@ -342,8 +369,8 @@ described below:
       - `R`: Number of replicated times to run the tests
       - `seed`: Random seed set for iterations
   - `corncob`:
-      - `count.min`: The minimum number of nonezero counts required for
-        a taxon to implement `corncob`
+      - `count.min`: The minimum number of nonzero counts required for a
+        taxon to implement `corncob`
   - `ZINBDPP`:
       - `N.mcmc`: Number of MCMC iterations
       - `b`: Shape hyper-parameter for the variance term (for more
@@ -360,14 +387,18 @@ Taking `ZINBDPP` as an example,
 
 ``` r
 # Specify the model-specific parameters for ZINB-DPP model
-ZINBDPP.control = gymControl(method = "ZINBDPP", N.mcmc = 10000, b = 1, h = 10, count.min = 2, seed = 1)
+ZINBDPP.control = gymControl(method = "ZINBDPP", 
+                             N.mcmc = 10000, 
+                             b = 1, h = 10, 
+                             count.min = 2, 
+                             seed = 1)
 # run Microbiome Gym with ZINB-DPP
 MicrobiomeGym(count.matrix = count.matrix, 
               phenotype = phenotype, 
               gymControl = anova.control)
 ```
 
-The function `gymControl` includes the defualt parameter values for all
+The function `gymControl` includes the default parameter values for all
 the methods. Hence, it is enough to just specify the method name. For
 example,
 
@@ -398,17 +429,17 @@ manuscripts or the package tutorials for more details. Here, we take
 
 The output of `ZINBDPP` includes:
 
-  - `remove.idx` A binary vector of length \(p\) showing if a taxon is
-    dropped from fitting the ZINB-DPP model (the corresponding element
-    euquals \(1\) if dropped)
+  - `remove.idx` A binary vector of length
+    ![p](https://latex.codecogs.com/png.latex?p "p") showing if a taxon
+    is dropped from fitting the ZINB-DPP model (the corresponding
+    element equals ![1](https://latex.codecogs.com/png.latex?1 "1") if
+    dropped)
   - `gamma.ppi`: The posterior probability of inclusion (PPI) for the
     taxa not removed. PPI is analogous to the p-value. The larger the
     PPI, the higher the probability of a taxon to be discriminating
     across the phenotypes
-  - `fold.change` Fold change of the normalized abundance for for the
-    taxa not removed
-  - We omit other model-specific output here since they are not
-    necessary for model evaluation.
+  - We omit other model-specific output here. Details are discussed in
+    the [the original paper](https://arxiv.org/abs/1902.08741)
 
 <div style="margin-bottom:50px;">
 
@@ -416,14 +447,17 @@ The output of `ZINBDPP` includes:
 
 ## Data for model evaluation
 
-We provide simulated and sythetic data for model evaluations. For both
-types of data, we set \(p = 1000\) taxonomic features, where \(50\) of
-them are truely discriminating between phenotype groups. We considered
-different sample sizes, log-scale effect sizes of the discriminating
-taxa, number of phenotype groups, and data generating mechanisms. Under
-each setting, we generated \(50\) replicates for model evaluation. More
-detials are available in the Supplementary materials [of this
-paper](https://arxiv.org/abs/1902.08741).
+We provide simulated and synthetic data for model evaluations. For both
+types of data, we set ![p
+= 1000](https://latex.codecogs.com/png.latex?p%20%3D%201000 "p = 1000")
+taxonomic features, where ![50](https://latex.codecogs.com/png.latex?50
+"50") of them are truly discriminating between phenotype groups. We
+considered different sample sizes, log-scale effect sizes of the
+discriminating taxa, number of phenotype groups, and data generating
+mechanisms. Under each setting, we generated
+![50](https://latex.codecogs.com/png.latex?50 "50") replicates for model
+evaluation. More details are available in the Supplementary materials
+[of this paper](https://arxiv.org/abs/1902.08741).
 
 <div style="margin-bottom:25px;">
 
@@ -431,9 +465,13 @@ paper](https://arxiv.org/abs/1902.08741).
 
 #### Simulated data
 
-We varied sample sizes (\(n \in \{24, 108\}\)), log-scale effect sizes
-(\(\sigma \in \{1, 2\}\)), number of phenotype groups
-(\(K \in \{2, 3\}\)), and data generating mechanisms (from a ZINB model
+We varied sample sizes ![n \\in
+\\{24, 108\\}](https://latex.codecogs.com/png.latex?n%20%5Cin%20%5C%7B24%2C%20108%5C%7D
+"n \\in \\{24, 108\\}"), log-scale effect sizes ![\\sigma \\in
+\\{1, 2\\}](https://latex.codecogs.com/png.latex?%5Csigma%20%5Cin%20%5C%7B1%2C%202%5C%7D
+"\\sigma \\in \\{1, 2\\}"), number of phenotype groups ![K \\in
+\\{2, 3\\}](https://latex.codecogs.com/png.latex?K%20%5Cin%20%5C%7B2%2C%203%5C%7D
+"K \\in \\{2, 3\\}"), and data generating mechanisms (from a ZINB model
 or Dirichlet multinomial model) to generate simulated data under
 different scenarios. We can load the data as follows:
 
@@ -442,11 +480,14 @@ different scenarios. We can load the data as follows:
 load("../data/simulate_zinb.Rdata")
 ```
 
-The object `simu.data` is a large list of \(400\) elements. The name of
-each individual list contains the information of sample size \(n\),
-log-scale effect sizes \(\sigma\), and number of phenotype group \(K\).
-‘seed’ is replicate index. For example, the name of the first element
-in the list is:
+The object `simu.data` is a large list of
+![400](https://latex.codecogs.com/png.latex?400 "400") elements. The
+name of each individual list contains the information of sample size
+![n](https://latex.codecogs.com/png.latex?n "n"), log-scale effect sizes
+![\\sigma](https://latex.codecogs.com/png.latex?%5Csigma "\\sigma"), and
+number of phenotype group ![K](https://latex.codecogs.com/png.latex?K
+"K"). ‘seed’ is replicate index. For example, the name of the first
+element in the list is:
 
 ``` r
 names(simu.data)[[1]]
@@ -454,9 +495,12 @@ names(simu.data)[[1]]
 
     ## [1] "K=2_n=24_p=1000_sigma=1_seed=1"
 
-It means that the corresponding count matrix (`simu.data[[1]]`) has
-\(n = 24\) samples, \(K =2\) phenotype groups, and the log-scale effect
-size of \(1\) for those discriminating taxa.
+It means that the corresponding count matrix (`simu.data[[1]]`) has ![n
+= 24](https://latex.codecogs.com/png.latex?n%20%3D%2024 "n = 24")
+samples, ![K =2](https://latex.codecogs.com/png.latex?K%20%3D2 "K =2")
+phenotype groups, and the log-scale effect size of
+![1](https://latex.codecogs.com/png.latex?1 "1") for those
+discriminating taxa.
 
 <div style="margin-bottom:25px;">
 
@@ -466,10 +510,14 @@ size of \(1\) for those discriminating taxa.
 
 We generated synthetic datasets based on multinomial models that
 characterize a real taxa abundance distribution, where the data
-generative scheme was proposed by Weiss et al. (2017). Agian, we
-included different sample sizes (\(n \in \{24, 108\}\)), log-scale
-effect sizes (\(\sigma \in \{1, 2\}\)), and sample types used to
-generate synthetic counts ({Skin, Feces}). But only \(K=2\) phenotype
+generative scheme was proposed by Weiss et al. (2017). Asian, we
+included different sample sizes ![n \\in
+\\{24, 108\\}](https://latex.codecogs.com/png.latex?n%20%5Cin%20%5C%7B24%2C%20108%5C%7D
+"n \\in \\{24, 108\\}"), log-scale effect sizes ![\\sigma \\in
+\\{1, 2\\}](https://latex.codecogs.com/png.latex?%5Csigma%20%5Cin%20%5C%7B1%2C%202%5C%7D
+"\\sigma \\in \\{1, 2\\}"), and sample types used to generate synthetic
+counts {Skin, Feces}. But only
+![K=2](https://latex.codecogs.com/png.latex?K%3D2 "K=2") phenotype
 groups.
 
 ``` r
@@ -477,7 +525,8 @@ groups.
 load("../data/synthetic_weiss.Rdata")
 ```
 
-The synthetic data is consisted of a list with \(400\) elements. Again,
+The synthetic data is consisted of a list with
+![400](https://latex.codecogs.com/png.latex?400 "400") elements. Again,
 we check the information in the name:
 
 ``` r
@@ -487,20 +536,22 @@ names(synth.data)[[1]]
     ## [1] "Type=Feces_n=24_sigma=1_seed=1"
 
 It means that the corresponding count matrix (`synth.data[[1]]`) were
-synthesized from the Feces samples, and it has \(n = 24\) samples and
-the log-scale effect size of \(1\) for those discriminating
-taxa.
+synthesized from the Feces samples, and it has ![n
+= 24](https://latex.codecogs.com/png.latex?n%20%3D%2024 "n = 24")
+samples and the log-scale effect size of
+![1](https://latex.codecogs.com/png.latex?1 "1") for those
+discriminating taxa.
 
 <div style="margin-bottom:25px;">
 
 </div>
 
-#### The phenotype information and true label of differentially abundance taxa
+#### Phenotype information and truly discriminating taxa
 
 The list of either the simulated and the synthetic data contains all the
 count matrices. In addition, the **row** and **column** names of each
 count matrix contain the information of the samples’ phenotype groups
-and the indicator of thoes truely discriminating taxa.
+and the indicator of those truly discriminating taxa.
 
 For example, the phenotype group information is the last character of
 the `rownames`.
@@ -542,35 +593,26 @@ taxa.info[differential.idx]
 
 </div>
 
-## An exmaple of Microbiome Gym
+## Tutorial
 
 <div style="margin-bottom:25px;">
 
 </div>
 
-### Load data
+User can apply the following tutorial to any dataset provided by
+Microbiome Gym. Here, we select `simu.data[[1]]` as the example data.
 
-We first load a count matrix from the simulated data for model
-evaluation
+### Load data
 
 ``` r
 # load count matrix 
-example.matrix = simu.data[[101]]
-names(simu.data)[[101]]
+load("../data/MicrobiomGymExampleData.Rdata", verbose = T)
 ```
 
-    ## [1] "K=2_n=108_p=1000_sigma=1_seed=1"
-
-``` r
-# extract the phenotype label and truly discriminating taxa index
-phenotype.info = rownames(example.matrix)
-phenotype = unlist(lapply(phenotype.info, function(x){substr(x, nchar(x), nchar(x))}))
-taxa.info = colnames(example.matrix)
-differential.idx = grep("-TP", taxa.info)
-# generate the binary vector of the discriminating taxa indicator
-true.label = rep(0, ncol(example.matrix))
-true.label[differential.idx] = 1
-```
+    ## Loading objects:
+    ##   example.matrix
+    ##   phenotype
+    ##   true.label
 
 <div style="margin-bottom:25px;">
 
@@ -610,7 +652,7 @@ corncob.pvalues = corncob.result$model.details$corncob.pval
 
 </div>
 
-### Vizualize model performance
+### Visualize model performance
 
 We defined function `plot.ROC` to visualize the differential abundance
 analysis result using the receiver operating characteristic (ROC) curve.
@@ -634,18 +676,24 @@ dataset.
 plot.ROC(response = true.label, predictor = metagenomeSeq.pvalues, method.name = "metagenomeSeq")
 ```
 
-<img src="Readme_files/figure-gfm/example_gym_roc-1.png" style="display: block; margin: auto;" />
+<img src="Readme_files/figure-gfm/example_gym_roc_1-1.png" style="display: block; margin: auto;" />
+
+For `corncob`, since several taxa were removed for model fitting, we
+also drop them in model evaluation
 
 ``` r
-plot.ROC(response = true.label, predictor = corncob.pvalues, method.name = "corncob")
+drop.idx = as.numeric(corncob.result$model.details$removed.taxa)
+plot.ROC(response = true.label[-drop.idx ], predictor = corncob.pvalues, method.name = "corncob")
 ```
 
-<img src="Readme_files/figure-gfm/example_gym_roc-2.png" style="display: block; margin: auto;" />
+<img src="Readme_files/figure-gfm/example_gym_roc_2-1.png" style="display: block; margin: auto;" />
 
 ## Contact
 
 Shuang Jiang <shuangj@smu.edu>, Department of Statistical Science,
 Southern Methodist University, Dallas, TX 75275
+
+## Reference
 
 <div id="refs" class="references">
 
