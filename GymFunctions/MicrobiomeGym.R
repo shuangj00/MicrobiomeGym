@@ -27,7 +27,8 @@
 
 MicrobiomeGym = function(count.matrix,
                          phenotype,
-                         gymControl = gymControl()) {
+                         gymControl = gymControl(),
+                         includeData = FALSE) {
   # check the model
   method = gymControl$method
   message("Running ", method, " on the input data \n")
@@ -94,11 +95,31 @@ MicrobiomeGym = function(count.matrix,
                          seed = gymControl$seed)
   }
   
+  version.info = NULL
+  if (method %in% c("DESeq2", "edgeR","metagenomeSeq", "DATest", "corncob")){
+    version.info = packageVersion(method)
+  }else if (method == "LDMtest"){
+    version.info = packageVersion(LDM)
+  }else if (method == "WaVEedgeR"){
+    version.info = list(version.edgeR = packageVersion("edgeR"),
+                        version.wave = packageVersion("zinbwave"))
+  }else if (method == "WaVEDESeq2"){
+    version.info = list(version.edgeR = packageVersion("edgeR"),
+                        version.wave = packageVersion("zinbwave"))
+  }
+   
   # add the test name information
-  gym.output = list(model.name = method, 
-                    model.details = gym.output, 
-                    count.matrix = count.matrix, 
-                    phenotype = phenotype)
+  if(includeData){
+    gym.output = list(model.name = method, 
+                      model.details = gym.output, 
+                      count.matrix = count.matrix, 
+                      phenotype = phenotype,
+                      version.info = version.info)
+  }else{
+    gym.output = list(model.name = method, 
+                      model.details = gym.output,
+                      version.info = version.info)
+  }
   return(gym.output)
 }
 
@@ -132,7 +153,7 @@ gymControl = function(method = "ANOVA",
                       R = 20, 
                       N.mcmc = 10000,
                       b = 2, 
-                      h = 20,
+                      h = 50,
                       count.min = 2,
                       seed = 123){
   # check the model input 

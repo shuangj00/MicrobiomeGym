@@ -43,7 +43,7 @@ WaVEedgeR = function(count.matrix, phenotype){
   
   # WaVE to reweight the zeros in the data
   message("Implementing ZINB-WaVE for edgeR...")
-  zinbwave.default = zinbwave(input.df, K = 2, epsilon=1000)
+  zinbwave.default = zinbwave(input.df, K = 2, epsilon=1000, observationalWeights = TRUE)
   zinbwave.weights = assay(zinbwave.default, "weights")
   
   # apply edgeR

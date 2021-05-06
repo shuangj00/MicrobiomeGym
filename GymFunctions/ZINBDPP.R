@@ -34,7 +34,7 @@ ZINBDPP = function(count.matrix = count.matrix,
                    phenotype = phenotype, 
                    N.mcmc = 10000, 
                    b = 2, 
-                   h = 20, 
+                   h = 10, 
                    count.min = 2,
                    seed = 123){
   # check input 
@@ -88,11 +88,16 @@ ZINBDPP = function(count.matrix = count.matrix,
                             mincount = count.min,
                             MRF = FALSE,
                             G = S0)
-  MCMC.temp = MCMC.output
-  rm(MCMC.output)
-  MCMC.temp$fold.change = apply(MCMC.temp$fold.change, 2, mean)
-  MCMC.temp$size.factor = apply(MCMC.temp$size.factor, 2, mean)
-  MCMC.temp$pi = NULL
-  MCMC.output = MCMC.temp
+
+  ZINBDPP.PPI = MCMC.output$gamma.ppi
+  ZINBDPP.details = list()
+  rm.taxa = which(MCMC.output$remove.idx == 1)
+  ZINBDPP.PPI[rm.taxa] = NA
+  ZINBDPP.details$fold.change = apply(MCMC.output$fold.change, 2, mean)
+  ZINBDPP.details$size.factor = apply(MCMC.output$size.factor, 2, mean)
+  
+  MCMC.output = list(ZINBDPP.PPI = ZINBDPP.PPI, 
+                     removed.idx = rm.taxa, 
+                     ZINBDPP.details = ZINBDPP.details)
   return(MCMC.output)
 }

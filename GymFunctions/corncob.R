@@ -54,13 +54,29 @@ corncob = function(count.matrix,
   rm.idx = apply(nonzero.counts,2, function(x){ifelse(any(x < count.min), T, F)} )
   count.matrix = count.matrix[, !rm.idx ]
   rm.taxa = taxa.names[rm.idx]
+  removed.idx = which(rm.idx)
   
   # apply corncob
   group.idx = as.factor(phenotype)
   pval.list = sapply(seq(1,ncol(count.matrix) ), single.lrt, count.matrix = count.matrix, phenotype = group.idx)
-  names(pval.list) = taxa.names[!rm.idx]
   
-  return(list(corncob.pval = pval.list,
+  pval.ret = pval.list
+  if(sum(rm.idx)!=0){
+    for(idx in removed.idx){
+      if(idx == 1){
+        pval.ret = c(NA, pval.ret)
+      }else if(idx == length(taxa.names)){
+        pval.ret = c(pval.ret, NA)
+      }else{
+        pval.ret = c(pval.ret[1:(idx - 1)], NA, pval.ret[idx:length(pval.ret)])
+      }
+      
+    }
+  }
+  
+  names(pval.ret) = taxa.names
+  return(list(corncob.pval = pval.ret,
+              removed.idx = removed.idx,
               removed.taxa = rm.taxa))
 }
 

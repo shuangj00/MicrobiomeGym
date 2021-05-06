@@ -24,7 +24,7 @@ LDMtest = function(count.matrix,
   
   # load libraries
   if(!require(LDM)){
-    message("Download the R package LDM from http://web1.sph.emory.edu/users/yhu30/software.html")
+    message("Download the R package LDM from https://github.com/yijuanhu/LDM")
   }
   
   # get the taxa names
