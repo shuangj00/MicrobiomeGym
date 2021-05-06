@@ -1,5 +1,5 @@
 ##########################################################################################
-#  Microbiome Gym: XXX
+#  Microbiome Gym
 #  maintaniner: Shuang Jiang, <shuangj@smu.edu>
 ##########################################################################################
 
@@ -96,16 +96,18 @@ MicrobiomeGym = function(count.matrix,
   }
   
   version.info = NULL
-  if (method %in% c("DESeq2", "edgeR","metagenomeSeq", "DATest", "corncob")){
+  if (method %in% c("DESeq2", "edgeR","metagenomeSeq", "corncob")){
     version.info = packageVersion(method)
   }else if (method == "LDMtest"){
-    version.info = packageVersion(LDM)
+    version.info = '2.1'
   }else if (method == "WaVEedgeR"){
     version.info = list(version.edgeR = packageVersion("edgeR"),
                         version.wave = packageVersion("zinbwave"))
   }else if (method == "WaVEDESeq2"){
     version.info = list(version.edgeR = packageVersion("edgeR"),
                         version.wave = packageVersion("zinbwave"))
+  }else if (method ==  "DATest"){
+    version.info = packageVersion("DAtest")
   }
    
   # add the test name information
