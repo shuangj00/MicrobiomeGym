@@ -59,11 +59,13 @@ MicrobiomeGym = function(count.matrix,
   } else if (method == "WaVEDESeq2"){
     source("../GymFunctions/WaVEDESeq2.R")
     gym.output = WaVEDESeq2(count.matrix = count.matrix, 
-                            phenotype = phenotype)
+                            phenotype = phenotype,
+                            count.min = gymControl$count.min)
   } else if (method == "WaVEedgeR"){
     source("../GymFunctions/WaVEedgeR.R")
     gym.output = WaVEedgeR(count.matrix = count.matrix, 
-                           phenotype = phenotype)
+                           phenotype = phenotype,
+                           count.min = gymControl$count.min)
   } else if (method == "metagenomeSeq"){
     source("../GymFunctions/metagenomeSeq.R")
     gym.output = metagenomeSeq(count.matrix = count.matrix, 

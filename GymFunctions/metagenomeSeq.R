@@ -50,10 +50,13 @@ metagenomeSeq = function(count.matrix, phenotype){
   # fit metagenomeSeq
   metagenomeSeq.fit = fitFeatureModel(MGS, model.matrix(~phenotype))
   metagenomeSeq.pval = metagenomeSeq.fit@pvalues
-  metagenomeSeq.pval[is.na(metagenomeSeq.pval)] = 1
-  metagenomeSeq.pval[is.infinite(metagenomeSeq.pval)] = 1
+  metagenomeSeq.pval[is.na(metagenomeSeq.pval)] = NA
+  metagenomeSeq.pval[is.infinite(metagenomeSeq.pval)] = NA
   
-  return(list(metagenomeSeq.pval = metagenomeSeq.pval, 
+  removed.taxa = which(is.na(metagenomeSeq.pval))
+
+  return(list(metagenomeSeq.pval = metagenomeSeq.pval,
+              removed.taxa = removed.taxa,
               metagenomeSeq.details = metagenomeSeq.fit))
 }
 

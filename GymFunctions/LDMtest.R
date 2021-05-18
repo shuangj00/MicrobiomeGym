@@ -38,6 +38,7 @@ LDMtest = function(count.matrix,
   rm.idx = apply(count.matrix, 2, function(x){all(x == 0)})
   rm.taxa = taxa.names[rm.idx]
   keep.taxa = taxa.names[!rm.idx]
+  removed.idx = sort(which(rm.idx))
   
   # apply LDM test
   count.matrix = count.matrix[, !rm.idx]
@@ -58,7 +59,22 @@ LDMtest = function(count.matrix,
   pval = as.numeric(fit.ldm$p.otu.freq)
   names(pval) = keep.taxa
   
-  return(list(ldm.pval = pval,
+  pval.ret = pval
+  if(sum(rm.idx)!=0){
+    for(idx in removed.idx){
+      if(idx == 1){
+        pval.ret = c(NA, pval.ret)
+      }else if(idx == length(taxa.names)){
+        pval.ret = c(pval.ret, NA)
+      }else{
+        pval.ret = c(pval.ret[1:(idx - 1)], NA, pval.ret[idx:length(pval.ret)])
+      }
+      
+    }
+  }
+  names(pval.ret) = taxa.names
+  return(list(ldm.pval = pval.ret,
+              removed.taxa = rm.taxa,
               ldm.details = fit.ldm))
 }
 

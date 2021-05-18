@@ -17,7 +17,7 @@
 #' @return WaVEedegR.pval P-values for the taxa by WaVE-edegR
 #' @return WaVEedegR.details Detailed output of WaVE-edgeR
 
-WaVEedgeR = function(count.matrix, phenotype){
+WaVEedgeR = function(count.matrix, phenotype, count.min = 1){
   # check input
   count.matrix = check.countmatrix(count.matrix)
   phenotype = check.phenotype(phenotype)
@@ -25,7 +25,7 @@ WaVEedgeR = function(count.matrix, phenotype){
   # load libraries
   pkg.list = c("edgeR","SummarizedExperiment","zinbwave" )
   for(pkg in pkg.list){
-    if(!require(package = pkg, character.only = TRUE)){
+    if(!require(package = pkg, warn.conflicts = FALSE,character.only = TRUE, quietly = TRUE)){
       if(!require(BiocManager)){
         install.packages("BiocManager")
       }else{
@@ -34,7 +34,28 @@ WaVEedgeR = function(count.matrix, phenotype){
       }
     }
   }
- 
+  if(!require(plyr)){
+    install.packages("plyr", version = "1.8.4")
+  }
+  
+  # get the taxa names
+  if(is.null(colnames(count.matrix))){
+    taxa.names = paste0("Taxon", seq(1, ncol(count.matrix)))
+  }else{
+    taxa.names = colnames(count.matrix)
+  }
+  
+  # filter the sparse taxa by group (required for fitting corncob)
+  nonzero.counts = apply(count.matrix, 2, function(x){dft = data.frame(count = x, pheno = phenotype);
+  nonzero.count = ddply(dft, c("pheno"), summarise,N = sum(count != 0)); 
+  nonzero.count = nonzero.count[, 2]; 
+  nonzero.count})
+  
+  rm.idx = apply(nonzero.counts,2, function(x){ifelse(any(x < count.min), T, F)} )
+  count.matrix = count.matrix[, !rm.idx ]
+  rm.taxa = taxa.names[rm.idx]
+  removed.idx = which(rm.idx)
+  
   # convert the raw count table to a "SummarizedExperiment" object
   pheno.f = factor(paste0("grp_",phenotype))
   rownames(count.matrix) = paste0("grp_",phenotype)
@@ -63,7 +84,25 @@ WaVEedgeR = function(count.matrix, phenotype){
   WaVEedegR.pval = WaVEedegR.output$PValue
   WaVEedegR.pval[is.na(WaVEedegR.pval)] = 1
   
-  return(list(WaVEedegR.pval = WaVEedegR.pval, 
+  pval.list = WaVEedegR.pval
+  pval.ret = pval.list
+  if(sum(rm.idx)!=0){
+    for(idx in removed.idx){
+      if(idx == 1){
+        pval.ret = c(NA, pval.ret)
+      }else if(idx == length(taxa.names)){
+        pval.ret = c(pval.ret, NA)
+      }else{
+        pval.ret = c(pval.ret[1:(idx - 1)], NA, pval.ret[idx:length(pval.ret)])
+      }
+      
+    }
+  }
+  names(pval.ret) = taxa.names
+  
+  return(list(WaVEedegR.pval = pval.ret, 
+              removed.idx = removed.idx,
+              removed.taxa = rm.taxa,
               WaVEedegR.details = WaVEedegR.output))
 }
 
